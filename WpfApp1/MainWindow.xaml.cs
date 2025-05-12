@@ -71,10 +71,6 @@ public partial class MainWindow : Window
                     if (task != null )
                     {
                         Write(DateTime.Now + " TaskQueue Count : " + TaskQueue.Count);
-                        if (task.Status == TaskStatus.Running)
-                        {
-                            continue;
-                        }
                         task.RunSynchronously();
                     }
                 }
@@ -82,7 +78,7 @@ public partial class MainWindow : Window
         });
     }
 
-    private Queue<Task> TaskQueue = new();
+    private ConcurrentQueue<Task> TaskQueue = new();
 
     private void Button_Click_1(object sender, RoutedEventArgs e)
     {
