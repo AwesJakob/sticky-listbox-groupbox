@@ -66,7 +66,7 @@ public partial class MainWindow : Window
         {
             while (true)
             {
-                if (TaskQueue.Count > 0 && TaskQueue.TryDequeue(out var task))
+                if (TaskQueue.TryDequeue(out var task))
                 {
                     if (task != null )
                     {
