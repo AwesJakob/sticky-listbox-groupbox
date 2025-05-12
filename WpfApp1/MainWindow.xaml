@@ -7,10 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
-        Width="800">
+        Width="800"
+        Loaded="Window_Loaded">
     <Window.Resources></Window.Resources>
     <Grid>
-        <ListBox x:Name="listBox"
+        <!--<ListBox x:Name="listBox"
                  DisplayMemberPath="Name"
                  LayoutUpdated="listBox_LayoutUpdated">
             <ListBox.GroupStyle>
@@ -32,10 +33,60 @@
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </ListBox.GroupStyle>
-        </ListBox>
+        </ListBox>-->
         <!--<TextBlock Name="Head" Height="30"
                    Grid.Row="0"
                    VerticalAlignment="Top"
                    Background="Beige" />-->
+        <TextBox IsReadOnly="True"
+                 Background="Transparent"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Disabled"
+                 TextChanged="TextBox_TextChanged"
+                 x:Name="tbx" />
+        <Viewport3D Name="MyViewport3D"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+            <Viewport3D.LayoutTransform>
+                <RotateTransform Angle="45" />
+            </Viewport3D.LayoutTransform>
+            <!-- 카메라 설정 -->
+            <Viewport3D.Camera>
+                <PerspectiveCamera Position="0,0,5"
+                                   LookDirection="0,0,-1"
+                                   UpDirection="0,1,0"
+                                   FieldOfView="60" />
+            </Viewport3D.Camera>
+            <!-- 3D 객체 정의 -->
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+                        <!-- 조명 -->
+                        <DirectionalLight Color="White"
+                                          Direction="-1,-1,-1" />
+                        <!-- 정육면체 -->
+                        <GeometryModel3D>
+                            <GeometryModel3D.Geometry>
+                                <MeshGeometry3D Positions="-1,-1,1  1,-1,1  1,1,1  -1,1,1  -1,-1,-1  1,-1,-1  1,1,-1  -1,1,-1"
+                                                TriangleIndices="0,1,2 0,2,3 4,6,5 4,7,6 0,4,5 0,5,1 1,5,6 1,6,2 2,6,7 2,7,3 3,7,4 3,4,0"
+                                                TextureCoordinates="0,0 1,0 1,1 0,1 0,0 1,0 1,1 0,1" />
+                            </GeometryModel3D.Geometry>
+                            <GeometryModel3D.Material>
+                                <DiffuseMaterial Brush="Blue" />
+                            </GeometryModel3D.Material>
+                        </GeometryModel3D>
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+        </Viewport3D>
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <Button Content="Queue item"
+                    Click="Button_Click_1" />
+            <Button Content="Run"
+                    Click="Button_Click" />
+        </StackPanel>
+       
     </Grid>
 </Window>
